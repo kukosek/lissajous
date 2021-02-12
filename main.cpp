@@ -36,7 +36,7 @@ int main() {
     }
 
     // We create a renderer with hardware acceleration, we also present according with the vertical sync refresh.
-    SDL_Renderer *s = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED) ;
+    SDL_Renderer *s = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC) ;
 	SDL_SetRenderDrawBlendMode(s, SDL_BLENDMODE_BLEND);
 
 	FpsCounter fpsCounter = FpsCounter(SDL_GetTicks());
