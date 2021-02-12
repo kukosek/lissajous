@@ -118,65 +118,13 @@ void TableManager::draw(uint32_t delta, uint32_t windowWidth, uint32_t windowHei
 				points_hist->points.clear();
 			}
 
-			if (points_hist->points.size() > 0) {
-				int oldPointIdx;
-				if (points_hist->insert_index == -1 || points_hist->insert_index == 0) oldPointIdx = points_hist->points.size()-1;
-				else oldPointIdx = points_hist->insert_index;
-				SDL_Point oldPoint = points_hist->points[oldPointIdx];
-
-				int x = oldPoint.x; int y = oldPoint.y;
-
-
-				int w = newPoint.x - x ;
-				int h = newPoint.y - y ;
-				int dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0 ;
-				if (w<0) dx1 = -1 ; else if (w>0) dx1 = 1 ;
-				if (h<0) dy1 = -1 ; else if (h>0) dy1 = 1 ;
-				if (w<0) dx2 = -1 ; else if (w>0) dx2 = 1 ;
-				int longest = abs(w) ;
-				int shortest = abs(h) ;
-				if (!(longest>shortest)) {
-					longest = abs(h) ;
-					shortest = abs(w) ;
-					if (h<0) dy2 = -1 ;
-					else if (h>0) dy2 = 1 ;
-					dx2 = 0 ;
-				}
-				int numerator = longest >> 1 ;
-				for (int i=0;i<=longest;i++)  {
-					SDL_Point line_point;
-					line_point.x = x;
-					line_point.y = y;
-					if (points_hist->insert_index != -1) {
-						if (points_hist->points.size() > points_hist->insert_index-1) {
-							points_hist->points[points_hist->insert_index] = line_point;
-							points_hist->insert_index++;
-						}else{
-							points_hist->insert_index = 0;
-						}
-					}
-					if (points_hist->insert_index == -1) {
-						points_hist->points.push_back(line_point);
-					}
-					numerator += shortest;
-					if (!(numerator<longest)) {
-						numerator -= longest ;
-						x += dx1 ;
-						y += dy1 ;
-					} else {
-						x += dx2 ;
-						y += dy2 ;
-					}
-				}
-			}else{
-				points_hist->points.push_back(newPoint);
-			}
+			points_hist->points.push_back(newPoint);
 
 			if (points_hist->old_points_opacity > 0) {
 				SDL_Point* old_points_arr = &points_hist->old_points[0];
 
 				SDL_SetRenderDrawColor(s, points_hist->color_r, points_hist->color_g, points_hist->color_b, points_hist->old_points_opacity);
-				SDL_RenderDrawPoints(s, old_points_arr, points_hist->old_points.size());
+				SDL_RenderDrawLines(s, old_points_arr, points_hist->old_points.size());
 				SDL_SetRenderDrawColor(s, 0x00, 0x00, 0x00, 0xFF);
 
 				points_hist->old_points_opacity -= delta*0.2;
