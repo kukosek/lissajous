@@ -1,20 +1,19 @@
 // Don't make it 0 or less :)
-#include <bits/stdint-uintn.h>
 #define FRAME_VALUES 60
 class FpsCounter {
 	public:
 		// the value you want
-		FpsCounter(uint32_t ticks);
-		void update(uint32_t ticks);
+		FpsCounter(unsigned int ticks);
+		void update(unsigned int ticks);
 		float fps;
 	private:
 		// An array to store frame times:
-		uint32_t frametimes[FRAME_VALUES];
+		unsigned int frametimes[FRAME_VALUES];
 
 		// Last calculated SDL_GetTicks
-		uint32_t frametimelast;
+		unsigned int frametimelast;
 
 		// total frames rendered
-		uint32_t framecount;
+		unsigned int framecount;
 
 };

@@ -1,8 +1,7 @@
 #include <string.h>
 #include "FpsCounter.h"
-#include <bits/stdint-uintn.h>
 // This function gets called once on startup.
-FpsCounter::FpsCounter(uint32_t ticks) {
+FpsCounter::FpsCounter(unsigned int ticks) {
 
         // Set all frame times to 0ms.
 		memset(frametimes, 0, sizeof(frametimes));
@@ -12,11 +11,11 @@ FpsCounter::FpsCounter(uint32_t ticks) {
 
 }
 
-void FpsCounter::update(uint32_t ticks) {
-        uint32_t frametimesindex;
-        uint32_t getticks;
-        uint32_t count;
-        uint32_t i;
+void FpsCounter::update(unsigned int ticks) {
+        unsigned int frametimesindex;
+        unsigned int getticks;
+        unsigned int count;
+        unsigned int i;
 
         // frametimesindex is the position in the array. It ranges from 0 to FRAME_VALUES.
         // This value rotates back to 0 after it hits FRAME_VALUES.

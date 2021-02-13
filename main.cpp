@@ -7,7 +7,6 @@
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_timer.h>
 #include <vector>
-#include <bits/stdint-uintn.h>
 #include <cstdint>
 #include <math.h>
 #include <SDL2/SDL.h>
@@ -17,7 +16,7 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char *argv[]) {
 	srand(time(NULL)); //seed random number generator by time (used by chossing a random circle color)
     int windowHeight = 600;
     int windowWidth = 800;
@@ -96,6 +95,7 @@ int main() {
 			}
         }
 
+		SDL_SetRenderDrawColor(s, 41, 0, 0, 255);
         // We clear what we draw before
         SDL_RenderClear(s);
 
